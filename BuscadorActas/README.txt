@@ -11,7 +11,7 @@ Miguel Angel Arvayo Gracia @MIKE06-GR	completar
 Mario Alexis Garcia Rodriguez @MarioAl3xis
 
 Descripción
-Tilin
+
 Flujo del sistema:
 
 registro de URLs → descarga de PDFs → indexación → búsqueda y resultados
