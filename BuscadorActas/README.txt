@@ -129,3 +129,4 @@ Interfaz con Bootstrap, diseño adaptable a móviles. [marcar si se implementa]
 [otros]
 Dependencias
 
+wawawa estoy mopdificando algo (pero en buen plan)
