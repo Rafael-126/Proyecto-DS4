@@ -1,0 +1,9 @@
+{
+  "urls": [
+    "https://fi-ing.unison.mx/"
+  ],
+  "max_profundidad": 3,
+  "pausa_segundos": 1.0,
+  "max_paginas_por_url": 150,
+  "palabras_clave": ["acta"]
+}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="get" action="{{ url_for('index') }}" class="row g-2 mb-4">
+  <div class="col-12 col-md">
+    <input type="search" name="q" value="{{ q }}" class="form-control form-control-lg"
+           placeholder="Escribe tu búsqueda…" autofocus>
+  </div>
+  <div class="col-12 col-md-auto">
+    <button type="submit" class="btn btn-primary btn-lg w-100">Buscar</button>
+  </div>
+</form>
+
+{% if sin_indice %}
+  <div class="alert alert-warning">
+    Todavía no hay actas indexadas. Ejecuta <code>python scraper.py run</code> y luego
+    <code>python indexer.py</code>.
+  </div>
+{% elif vacia %}
+  <div class="alert alert-info">Escribe algo para buscar.</div>
+{% elif consultado %}
+  {% if resultados %}
+    <p class="text-muted">
+      {{ resultados|length }} resultado(s) para <strong>{{ q }}</strong> ({{ segundos }} s)
+    </p>
+    {% for r in resultados %}
+    <div class="card shadow-sm mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start gap-2">
+          <h2 class="h6 card-title mb-1">{{ r.nombre }}</h2>
+          <span class="badge {{ 'text-bg-success' if r.porcentaje >= 90 else 'text-bg-warning' if r.porcentaje >= 80 else 'text-bg-secondary' }}">
+            {{ r.porcentaje }}%
+          </span>
+        </div>
+        <div class="text-muted small mb-2">Página {{ r.pagina }}</div>
+        <p class="card-text">{{ r.antes }} <mark>{{ r.coincidencia }}</mark> {{ r.despues }}</p>
+        <a href="{{ r.url }}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary">
+          Abrir PDF original
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  {% else %}
+    <div class="alert alert-secondary">
+      No se encontraron coincidencias para <strong>{{ q }}</strong> (similitud mínima {{ umbral }}%).
+      Prueba con otras palabras o revisa la escritura.
+    </div>
+  {% endif %}
+{% endif %}
+{% endblock %}
